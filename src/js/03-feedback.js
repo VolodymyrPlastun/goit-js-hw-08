@@ -29,11 +29,15 @@ function onFormSubmit(evt) {
 }
 
 function userData() {
-    const savedUserData = localStorage.getItem(STORAGE_KEY, formData);
+    const savedUserData = localStorage.getItem(STORAGE_KEY);
     const parsedUserData = JSON.parse(savedUserData);
     if (savedUserData) {
-   refs.email.value = parsedUserData.email || "";
-        refs.feedback.value = parsedUserData.message || "";
+//    refs.email.value = parsedUserData.email || "";
+//         refs.feedback.value = parsedUserData.message || "";
+        Object.entries(parsedUserData).forEach(([name, value]) => {
+            formData[name] = value;
+            refs.form.elements[name].value = value;
+        })
     }
 
 }
